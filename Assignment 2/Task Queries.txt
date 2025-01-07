@@ -1,0 +1,97 @@
+Task 1: List all doctors in the doctors collection, displaying only their name and specialty
+
+db.Doctors.find({}, { name: 1, specialty: 1, _id: 0 })
+
+Explanation: Code searches Doctor collection with an empty search condition (so all files). The output is set to include the name & specialty but not the _id.
+
+
+
+Task 2: Find all female patients who are younger than 30
+
+db.Patients.find({ gender: "Female", age: { $lt: 30 } })
+
+Explanation: Code searches Patients collection where gender is "Female" and age is <30.
+
+
+Task 3: Retrieve all appointments that have a status of 'Completed', displaying only appointment_id and status
+
+db.Appointments.find({ status: "Completed" }, { appointment_id: 1, status: 1, _id: 0 })
+
+Explanation: Code searches Appointments collection where status is "Completed". The output is set to include the apointment_id & status but not the _id.
+
+
+
+Task 4: List all appointments with a status of 'Scheduled', displaying only appointment_id, doctor_id, and status
+
+db.Appointments.find({ status: "Scheduled" }, { appointment_id: 1, doctor_id: 1, status: 1, _id: 0 })
+
+Explanation: Code searches Appointments collection where status is "Scheduled". The output is set to include the apointment_id, doctor_id, & status but not the _id.
+
+
+
+Task 5: Retrieve all patients who are older than 60 and do not have a medical_history field
+
+db.Patients.find({ age: { $gt: 60 }, medical_history: {$exists: false} })
+
+Explanation: Code searches Patients collection where age is > 60 and the medical_history is empty.
+
+
+
+Task 6: List all doctors with more than 20 years of experience, showing only their name, specialty, and experience_years
+
+db.Doctors.find({experience_years: { $gt: 20 }}, { name: 1, specialty: 1, experience_years: 1, _id: 0 })
+
+Explanation: Code searches Doctors collection where experience_years is > 20. The output is set to include the name, specialty, & experience_years but not the _id.
+
+
+
+Task 7: Delete all appointments with a status of 'Cancelled'
+
+db.Appointments.deleteMany({ status: "Cancelled" })
+
+Explanation: Code removes rows in the Appointments collection where status is "Cancelled".
+
+
+
+Task 8: Remove a patient record if they are over 85 years old or do not have a phone_number field
+
+db.Patients.deleteMany({ 
+	$or: [
+		age: { $gt: 85 }, phone_number: {$exists: false} 
+]
+})
+
+Explanation: Code removes rows in the Patients collection where either a) the age is > 85, or b) the phone_number has no value.
+
+
+
+Task 9: Update the status of all appointments to 'Overdue' if they are currently in 'Scheduled' status
+
+db.Appointments.updateMany(
+	{ status: "Scheduled" },
+	{ $set: { status: "Overdue" } }
+)
+
+Explanation: Code finds rows in the Appointments collection where status is "Scheduled" and changes the status value to "Overdue".
+
+
+
+Task 10: Truncate the patients collection by removing all patient records
+
+db.Patients.deleteMany({})
+
+Explanation: Code removes all rows in the Patients collection.
+
+
+
+
+Task 11: Find all appointments where the status is 'Scheduled' and the doctor_id exists, or the status is 'Pending' and the doctor_id exists (Extra point)
+
+db.appointments.find({
+	$or: [
+		{ status: "Scheduled", doctor_id: { $exists: true } },
+		{ status: "Pending", doctor_id: { $exists: true } }
+]
+})
+
+Explanation: Code searches Appointments collection where either: a) status is "Scheduled" and the doctor_id has a value, or b) status is "Scheduled" and the doctor_id has a value.
