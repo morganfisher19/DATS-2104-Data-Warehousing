@@ -1,0 +1,2 @@
+SELECT CONCAT(Make, ' ', Model) AS "Make and Model"
+FROM EVDetails;

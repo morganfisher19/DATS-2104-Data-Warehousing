@@ -1,0 +1,2 @@
+SELECT ROUND(ElectricRange, 0) AS "Half of Electric Range"
+FROM EVDetails;

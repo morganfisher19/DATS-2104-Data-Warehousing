@@ -1,0 +1,3 @@
+SELECT *
+FROM EVDetails
+WHERE LEFT(VIN, 2) > RIGHT(VIN, 2);

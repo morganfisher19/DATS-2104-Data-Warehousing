@@ -1,0 +1,4 @@
+SELECT e.*, c.StationName, c.Location, c.Capacity, c.EVConnectorType
+FROM EVDetails e
+LEFT JOIN ChargingStation c
+ON e.EV_ID = c.EV_ID;

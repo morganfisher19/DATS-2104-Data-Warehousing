@@ -1,0 +1,4 @@
+SELECT EV_ID, VIN, Year, Make, Model, ROUND(ElectricRange / 2) AS HalfRange
+FROM EVDetails
+WHERE Year > 2018 AND ElectricRange > 200
+ORDER BY Year DESC;

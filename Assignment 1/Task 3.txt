@@ -1,0 +1,3 @@
+SELECT * 
+FROM EVDetails
+WHERE VIN REGEXP '^[A-F]' AND VIN REGEXP '[M-Z]$';
