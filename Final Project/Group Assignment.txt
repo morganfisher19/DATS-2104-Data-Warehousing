@@ -1,0 +1,55 @@
+Group Assignment
+
+Loading csv data in neo4j browser:
+
+LOAD CSV WITH HEADERS FROM 'file:///road_network2.csv' as row
+MERGE (n:city1 {city: row.city1})
+MERGE (m:city2 {city: row.city2})
+MERGE (n)-[:TO {dist:row.distance}]->(m);
+
+
+
+LOAD CSV WITH HEADERS FROM 'file:///road_network2.csv' AS row
+WITH row WHERE row.city1 IS NOT NULL
+
+MERGE (n:City {city_name: row.city1})
+MERGE (n:City {city_name: row.city2})
+
+
+MERGE (n)-[:TO {distance: toInteger(row.distance)}]->(m);
+
+
+
+
+To delete:
+MATCH (n)
+DETACH DELETE n;
+
+
+
+Example:
+MATCH (n)-[r:TO]->(m)
+WHERE n.id = "Atlanta" OR m.id = "Atlanta"
+RETURN n.id AS FromCity, m.id AS ToCity, r.dist AS Distance;
+
+
+MATCH (n:city {id:'Atlanta'})-[r]->(m:city)
+RETURN type(r) AS type, m.city AS city
+
+
+
+Extra Credit Task 1:
+MATCH (n:city)
+
+MATCH (n)-[r:TO]-(connected)
+WITH n.id AS city, COUNT(r) AS connections
+WHERE connections = 2
+RETURN city, connections;
+
+
+Extra Credit Task 2:
+...
+
+
+Extra Credit Task 3:
+...
